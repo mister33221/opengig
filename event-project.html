@@ -366,6 +366,11 @@
         line-height: 1.3;
       }
 
+      /* 彈窗中的活動標題設為黑色 */
+      .event-modal .event-title {
+        color: #000000;
+      }
+
       .event-date {
         font-size: 0.9em;
         color: #cccccc;
@@ -477,6 +482,9 @@
         -webkit-backdrop-filter: blur(10px);
         box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
         overflow: hidden;
+        max-height: 85vh;
+        display: flex;
+        flex-direction: column;
       }
       
       .modal-header {
@@ -484,10 +492,33 @@
         padding: 20px 30px;
         position: relative;
         border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        flex-shrink: 0;
       }
       
       .modal-body {
         padding: 30px;
+        overflow-y: auto;
+        flex: 1;
+        /* 自定義滾動條樣式 */
+        scrollbar-width: thin;
+        scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+      }
+      
+      .modal-body::-webkit-scrollbar {
+        width: 8px;
+      }
+      
+      .modal-body::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      
+      .modal-body::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 4px;
+      }
+      
+      .modal-body::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.5);
       }
       
       .two-column-form {
@@ -1071,6 +1102,180 @@
         display: inline-block;
       }
 
+      /* 圖片上傳樣式 */
+      .image-upload-container {
+        margin-top: 6px;
+      }
+      
+      .image-upload-area {
+        border: 2px dashed rgba(255, 255, 255, 0.3);
+        border-radius: 8px;
+        padding: 20px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background: rgba(50, 50, 50, 0.3);
+        position: relative;
+        min-height: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .image-upload-area:hover {
+        border-color: rgba(255, 255, 255, 0.5);
+        background: rgba(60, 60, 60, 0.4);
+      }
+      
+      .image-preview {
+        position: relative;
+        width: 100%;
+        max-width: 200px;
+      }
+      
+      .remove-image {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background: rgba(255, 0, 0, 0.8);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+      }
+      
+      .remove-image:hover {
+        background: rgba(255, 0, 0, 1);
+        transform: scale(1.1);
+      }
+      
+      .upload-placeholder {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .image-hint {
+        font-size: 11px;
+        color: #999999;
+        margin-top: 8px;
+        font-weight: 400;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+      
+      /* Tab 切換樣式 */
+      .modal-tabs {
+        display: flex;
+        border-bottom: 1px solid #e2e8f0;
+        margin-bottom: 20px;
+      }
+      
+      .modal-tab {
+        flex: 1;
+        padding: 12px 16px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+        color: #666;
+        transition: all 0.3s ease;
+        border-bottom: 2px solid transparent;
+      }
+      
+      .modal-tab.active {
+        color: #4a5568;
+        border-bottom-color: #667eea;
+      }
+      
+      .modal-tab:hover {
+        background: #f8fafc;
+      }
+      
+      .tab-content {
+        display: none;
+      }
+      
+      .tab-content.active {
+        display: block;
+      }
+      
+      .poster-image {
+        width: 100%;
+        max-width: 500px;
+        height: auto;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+      
+      .poster-image:hover {
+        transform: scale(1.02);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      }
+      
+      .poster-container {
+        text-align: center;
+        padding: 20px;
+      }
+      
+      /* 全螢幕圖片檢視 */
+      .image-fullscreen {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        z-index: 2000;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .image-fullscreen.active {
+        display: flex;
+      }
+      
+      .fullscreen-image {
+        max-width: 90%;
+        max-height: 90%;
+        object-fit: contain;
+      }
+      
+      .fullscreen-close {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+      }
+      
+      .fullscreen-close:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+
       .event-official-url {
         margin-top: 10px;
         padding-top: 10px;
@@ -1209,6 +1414,45 @@
         .modal-content.add-event-modal {
           width: 95%;
           max-height: 90vh;
+          overflow-y: auto;
+        }
+        
+        /* 手機版分享活動彈窗滾動條樣式 */
+        .modal-content.add-event-modal::-webkit-scrollbar {
+          width: 8px;
+        }
+        
+        .modal-content.add-event-modal::-webkit-scrollbar-track {
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 4px;
+        }
+        
+        .modal-content.add-event-modal::-webkit-scrollbar-thumb {
+          background: rgba(255, 255, 255, 0.3);
+          border-radius: 4px;
+        }
+        
+        .modal-content.add-event-modal::-webkit-scrollbar-thumb:hover {
+          background: rgba(255, 255, 255, 0.5);
+        }
+        
+        /* 手機版 modal-body 滾動條加強 */
+        .modal-content.add-event-modal .modal-body::-webkit-scrollbar {
+          width: 10px;
+        }
+        
+        .modal-content.add-event-modal .modal-body::-webkit-scrollbar-track {
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 4px;
+        }
+        
+        .modal-content.add-event-modal .modal-body::-webkit-scrollbar-thumb {
+          background: rgba(255, 255, 255, 0.4);
+          border-radius: 4px;
+        }
+        
+        .modal-content.add-event-modal .modal-body::-webkit-scrollbar-thumb:hover {
+          background: rgba(255, 255, 255, 0.6);
         }
         
         /* 在手機版中隱藏桌面版日期活動區塊 */
@@ -1280,6 +1524,15 @@
         .comments-section-mobile {
           display: none !important;
         }
+        
+        /* 桌面版隱藏手機版tab */
+        .mobile-tabs {
+          display: none !important;
+        }
+        
+        .mobile-tab-content {
+          display: none !important;
+        }
       }
 
       /* Mobile版本保持原有佈局 */
@@ -1300,6 +1553,65 @@
 
         .comments-section-mobile {
           display: block !important;
+        }
+        
+        /* Mobile版tab樣式 */
+        .mobile-tabs {
+          display: flex;
+          background: #f8fafc;
+          border-radius: 8px;
+          padding: 4px;
+          margin: 20px 0;
+        }
+        
+        .mobile-tab {
+          flex: 1;
+          padding: 12px 16px;
+          background: none;
+          border: none;
+          cursor: pointer;
+          font-size: 14px;
+          font-weight: 600;
+          color: #666;
+          transition: all 0.3s ease;
+          border-radius: 6px;
+          text-align: center;
+        }
+        
+        .mobile-tab.active {
+          color: #4a5568;
+          background: #ffffff;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .mobile-tab:hover {
+          background: #e2e8f0;
+        }
+        
+        .mobile-tab.active:hover {
+          background: #ffffff;
+        }
+        
+        .mobile-tab-content {
+          display: none;
+        }
+        
+        .mobile-tab-content.active {
+          display: block;
+        }
+        
+        .mobile-tab-content .poster-container {
+          text-align: center;
+          padding: 20px;
+        }
+        
+        /* 手機版隱藏桌面版tab */
+        .modal-tabs {
+          display: none !important;
+        }
+        
+        .tab-content {
+          display: none !important;
         }
       }
     </style>
@@ -1369,12 +1681,10 @@
                   />
                   <div class="location-info" id="locationInfo"></div>
                 </div>
-              </div>
-              
-              <div class="form-column form-column-right">
+                
                 <div class="form-row">
                   <div class="form-group" >
-                    <label for="eventType">活動類型</label>
+                    <label for="eventType">活動天數</label>
                     <select id="eventType" onchange="toggleDateEndField()" style="width: 100%">
                       <option value="single">單日活動</option>
                       <option value="multi">多日活動</option>
@@ -1385,7 +1695,9 @@
                     <input type="date" id="eventEndDate" />
                   </div>
                 </div>
-                
+              </div>
+              
+              <div class="form-column form-column-right">
                 <div class="form-row">
                   <div class="form-group">
                     <label for="eventCost">費用</label>
@@ -1419,6 +1731,38 @@
                     </div>
                   </div>
                 </div>
+                
+                <div class="form-group">
+                  <label for="eventImage">活動海報圖片</label>
+                  <div class="image-upload-container">
+                    <input
+                      type="file"
+                      id="eventImage"
+                      accept="image/*"
+                      style="display: none;"
+                      onchange="handleImageUpload(event)"
+                    />
+                    <div class="image-upload-area" onclick="document.getElementById('eventImage').click()">
+                      <div class="image-preview" id="imagePreview" style="display: none;">
+                        <img id="previewImg" src="" alt="預覽圖片" style="width: 100%; height: 150px; object-fit: cover; border-radius: 6px;">
+                        <button type="button" class="remove-image" onclick="removeImage(event)">×</button>
+                      </div>
+                      <div class="upload-placeholder" id="uploadPlaceholder">
+                        <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor" style="margin-bottom: 8px; color: #888;">
+                          <path d="M19 7v2.99s-1.99.01-2 0V7h-3s.01-1.99 0-2h3V2h2v3h3v2h-3zm-3 4V9h-3V7H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-8h-3zM5 19l3-4 2 3 3-4 4 5H5z"/>
+                        </svg>
+                        <p style="margin: 0; color: #888; font-size: 14px;">點擊上傳活動海報</p>
+                        <p style="margin: 5px 0 0 0; color: #666; font-size: 12px;">支援 JPG、PNG 格式</p>
+                      </div>
+                    </div>
+                    <div class="image-hint">
+                      <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="margin-right: 4px;">
+                        <path d="M11.251 4v16M4.751 10.5h13M4.751 13.5h13"></path>
+                      </svg>
+                      建議尺寸：16:9 比例，檔案大小不超過 2MB
+                    </div>
+                  </div>
+                </div>
               </div>
               
               <div class="form-footer full-width">
@@ -1443,7 +1787,7 @@
     </div>
 
     <!-- 活動詳情彈窗 -->
-    <div id="eventModal" class="modal">
+    <div id="eventModal" class="modal event-modal">
       <div class="modal-content">
         <span class="close" onclick="closeEventModal()">&times;</span>
         <div class="modal-left-panel" id="modalLeftPanel"></div>
@@ -1457,6 +1801,12 @@
         <span class="close" onclick="closeDailyEventsModal()">&times;</span>
         <div id="mobileSelectedDateEvents" class="mobile-daily-events-content"></div>
       </div>
+    </div>
+    
+    <!-- 全螢幕圖片檢視 -->
+    <div id="imageFullscreen" class="image-fullscreen">
+      <button class="fullscreen-close" onclick="closeFullscreenImage()">&times;</button>
+      <img id="fullscreenImg" src="" alt="全螢幕圖片" class="fullscreen-image">
     </div>
 
     <script>
@@ -1940,6 +2290,7 @@
             locationUrl,
             officialUrl,
             tags: [...currentTags],
+            image: selectedImage || `https://picsum.photos/100/150?random=${eventId}`, // 使用上傳的圖片或預設圖片
             date: date,
             status: "pending",
             isMultiDay: isMultiDay,
@@ -1961,8 +2312,17 @@
         document.getElementById("eventForm").reset();
         document.getElementById("locationInfo").style.display = "none";
         currentTags = []; // 清空標籤
+        selectedImage = null; // 清空圖片
         document.getElementById("tagsDisplay").innerHTML = "";
         document.getElementById("eventEndDateGroup").style.display = "none"; // 隱藏結束日期欄位
+        
+        // 重置圖片預覽
+        const preview = document.getElementById('imagePreview');
+        const placeholder = document.getElementById('uploadPlaceholder');
+        if (preview && placeholder) {
+          preview.style.display = 'none';
+          placeholder.style.display = 'flex';
+        }
         
         // 關閉新增活動彈窗
         closeAddEventModal();
@@ -2110,18 +2470,16 @@
     const totalComments = eventComments.reduce((count, comment) => count + 1 + comment.replies.length, 0);
 
     modalLeftPanel.innerHTML = `
-        <div class="event-header">
-            <div>
-                <div class="event-title" style="font-size: 1.5em;">${event.title}</div>
-                <div style="display: flex; align-items: center; gap: 15px; margin-top: 5px;">
-                    <div class="event-date" style="font-size: 1.1em;">
-                        ${event.isMultiDay ? 
-                          `多日活動：${formatDate(event.multiDayInfo.allDates[0])} - ${formatDate(event.multiDayInfo.allDates[event.multiDayInfo.allDates.length-1])}` : 
-                          formatDate(event.date)}
-                    </div>
-                    <div class="event-status ${statusClass[event.status]}">
-                        ${statusText[event.status]}
-                    </div>
+        <div class="event-header" style="margin-bottom: 15px;">
+            <div class="event-title" style="font-size: 1.5em; margin-bottom: 10px;">${event.title}</div>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <div class="event-date" style="font-size: 1.1em;">
+                    ${event.isMultiDay ? 
+                      `多日活動：${formatDate(event.multiDayInfo.allDates[0])} - ${formatDate(event.multiDayInfo.allDates[event.multiDayInfo.allDates.length-1])}` : 
+                      formatDate(event.date)}
+                </div>
+                <div class="event-status ${statusClass[event.status]}">
+                    ${statusText[event.status]}
                 </div>
             </div>
         </div>
@@ -2153,38 +2511,64 @@
             </div>
         </div>
 
-        <!-- Mobile版留言 -->
-        <div class="comments-section comments-section-mobile">
-            <div class="comments-header">
-                <div class="comments-title">討論區(${totalComments})</div>
+        <!-- Mobile版tab系統 -->
+        <div class="mobile-tabs">
+            <button class="mobile-tab active" onclick="switchMobileTab('poster', ${event.id})">海報</button>
+            <button class="mobile-tab" onclick="switchMobileTab('comments', ${event.id})">討論區(${totalComments})</button>
+        </div>
+        
+        <div class="mobile-tab-content active" id="mobile-poster-tab-${event.id}">
+            <div class="poster-container">
+                <img src="https://picsum.photos/300/220?random=${event.id}" 
+                     alt="${event.title}" 
+                     class="poster-image"
+                     onclick="openFullscreenImage('https://picsum.photos/800/1200?random=${event.id}')">
             </div>
-            <div class="comment-form">
-                <textarea class="comment-input" placeholder="分享你的想法或經驗..." id="commentInput-mobile-${event.id}"></textarea>
-                <div class="comment-form-actions">
-                    <input type="text" class="comment-author-input" placeholder="你的名字" id="commentAuthor-mobile-${event.id}">
-                    <button class="comment-submit" onclick="submitComment(${event.id}, 'mobile')">發布留言</button>
+        </div>
+        
+        <div class="mobile-tab-content" id="mobile-comments-tab-${event.id}">
+            <div class="comments-section comments-section-mobile">
+                <div class="comment-form">
+                    <textarea class="comment-input" placeholder="分享你的想法或經驗..." id="commentInput-mobile-${event.id}"></textarea>
+                    <div class="comment-form-actions">
+                        <input type="text" class="comment-author-input" placeholder="你的名字" id="commentAuthor-mobile-${event.id}">
+                        <button class="comment-submit" onclick="submitComment(${event.id}, 'mobile')">發布留言</button>
+                    </div>
                 </div>
-            </div>
-            <div class="comments-list" id="commentsList-mobile-${event.id}">
-                ${renderComments(eventComments, event.id)}
+                <div class="comments-list" id="commentsList-mobile-${event.id}">
+                    ${renderComments(eventComments, event.id)}
+                </div>
             </div>
         </div>
     `;
 
     modalRightPanel.innerHTML = `
-        <div class="comments-section-desktop">
-            <div class="comments-header">
-                <div class="comments-title">討論區(${totalComments})</div>
+        <div class="modal-tabs">
+            <button class="modal-tab active" onclick="switchTab('poster', ${event.id})">海報</button>
+            <button class="modal-tab" onclick="switchTab('comments', ${event.id})">討論區(${totalComments})</button>
+        </div>
+        
+        <div class="tab-content active" id="poster-tab-${event.id}">
+            <div class="poster-container">
+                <img src="https://picsum.photos/400/600?random=${event.id}" 
+                     alt="${event.title}" 
+                     class="poster-image"
+                     onclick="openFullscreenImage('https://picsum.photos/800/1200?random=${event.id}')">
             </div>
-            <div class="comment-form">
-                <textarea class="comment-input" placeholder="分享你的想法或經驗..." id="commentInput-desktop-${event.id}"></textarea>
-                <div class="comment-form-actions">
-                    <input type="text" class="comment-author-input" placeholder="你的名字" id="commentAuthor-desktop-${event.id}">
-                    <button class="comment-submit" onclick="submitComment(${event.id}, 'desktop')">發布留言</button>
+        </div>
+        
+        <div class="tab-content" id="comments-tab-${event.id}">
+            <div class="comments-section-desktop">
+                <div class="comment-form">
+                    <textarea class="comment-input" placeholder="分享你的想法或經驗..." id="commentInput-desktop-${event.id}"></textarea>
+                    <div class="comment-form-actions">
+                        <input type="text" class="comment-author-input" placeholder="你的名字" id="commentAuthor-desktop-${event.id}">
+                        <button class="comment-submit" onclick="submitComment(${event.id}, 'desktop')">發布留言</button>
+                    </div>
                 </div>
-            </div>
-            <div class="comments-list" id="commentsList-desktop-${event.id}">
-                ${renderComments(eventComments, event.id)}
+                <div class="comments-list" id="commentsList-desktop-${event.id}">
+                    ${renderComments(eventComments, event.id)}
+                </div>
             </div>
         </div>
     `;
@@ -2302,8 +2686,17 @@
           (count, comment) => count + 1 + comment.replies.length,
           0
         );
+        
+        // 更新手機版討論區標題
         document.querySelectorAll(".comments-title").forEach((titleElement) => {
           titleElement.textContent = `討論區(${totalComments})`;
+        });
+        
+        // 更新桌面版tab標題
+        document.querySelectorAll(".modal-tab").forEach((tabElement) => {
+          if (tabElement.textContent.includes("討論區")) {
+            tabElement.textContent = `討論區(${totalComments})`;
+          }
         });
       }
 
@@ -2385,8 +2778,17 @@
           (count, comment) => count + 1 + comment.replies.length,
           0
         );
+        
+        // 更新手機版討論區標題
         document.querySelectorAll(".comments-title").forEach((titleElement) => {
           titleElement.textContent = `討論區(${totalComments})`;
+        });
+        
+        // 更新桌面版tab標題
+        document.querySelectorAll(".modal-tab").forEach((tabElement) => {
+          if (tabElement.textContent.includes("討論區")) {
+            tabElement.textContent = `討論區(${totalComments})`;
+          }
         });
       }
 
@@ -2461,6 +2863,120 @@
           updateTagsDisplay();
         };
       }
+      
+      // 圖片上傳處理
+      let selectedImage = null;
+      
+      function handleImageUpload(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+        
+        // 檢查檔案大小 (2MB)
+        if (file.size > 2 * 1024 * 1024) {
+          alert('圖片檔案大小不能超過 2MB');
+          return;
+        }
+        
+        // 檢查檔案類型
+        if (!file.type.startsWith('image/')) {
+          alert('請選擇有效的圖片檔案');
+          return;
+        }
+        
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          selectedImage = e.target.result;
+          showImagePreview(selectedImage);
+        };
+        reader.readAsDataURL(file);
+      }
+      
+      function showImagePreview(imageSrc) {
+        const preview = document.getElementById('imagePreview');
+        const placeholder = document.getElementById('uploadPlaceholder');
+        const previewImg = document.getElementById('previewImg');
+        
+        previewImg.src = imageSrc;
+        preview.style.display = 'block';
+        placeholder.style.display = 'none';
+      }
+      
+      function removeImage(event) {
+        event.stopPropagation();
+        selectedImage = null;
+        
+        const preview = document.getElementById('imagePreview');
+        const placeholder = document.getElementById('uploadPlaceholder');
+        const fileInput = document.getElementById('eventImage');
+        
+        preview.style.display = 'none';
+        placeholder.style.display = 'flex';
+        fileInput.value = '';
+      }
+      
+      // Tab 切換功能
+      function switchTab(tabName, eventId) {
+        // 移除所有active class
+        document.querySelectorAll('.modal-tab').forEach(tab => {
+          tab.classList.remove('active');
+        });
+        document.querySelectorAll('.tab-content').forEach(content => {
+          content.classList.remove('active');
+        });
+        
+        // 添加active class到選中的tab
+        event.target.classList.add('active');
+        document.getElementById(`${tabName}-tab-${eventId}`).classList.add('active');
+      }
+      
+      // 手機版tab切換
+      function switchMobileTab(tabName, eventId) {
+        // 移除所有active class
+        document.querySelectorAll('.mobile-tab').forEach(tab => {
+          tab.classList.remove('active');
+        });
+        document.querySelectorAll('.mobile-tab-content').forEach(content => {
+          content.classList.remove('active');
+        });
+        
+        // 添加active class到選中的tab
+        event.target.classList.add('active');
+        document.getElementById(`mobile-${tabName}-tab-${eventId}`).classList.add('active');
+      }
+      
+      // 全螢幕圖片檢視
+      function openFullscreenImage(imageSrc) {
+        const fullscreen = document.getElementById('imageFullscreen');
+        const fullscreenImg = document.getElementById('fullscreenImg');
+        
+        fullscreenImg.src = imageSrc;
+        fullscreen.classList.add('active');
+        
+        // 按ESC鍵關閉
+        document.addEventListener('keydown', handleEscKey);
+      }
+      
+      function closeFullscreenImage() {
+        const fullscreen = document.getElementById('imageFullscreen');
+        fullscreen.classList.remove('active');
+        
+        // 移除ESC鍵監聽
+        document.removeEventListener('keydown', handleEscKey);
+      }
+      
+      function handleEscKey(event) {
+        if (event.key === 'Escape') {
+          closeFullscreenImage();
+        }
+      }
+      
+      // 點擊全螢幕背景關閉
+      document.addEventListener('click', function(event) {
+        const fullscreen = document.getElementById('imageFullscreen');
+        if (event.target === fullscreen) {
+          closeFullscreenImage();
+        }
+      });
     </script>
   </body>
 </html>
