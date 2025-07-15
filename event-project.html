@@ -977,14 +977,19 @@
           padding: 0 !important;
           display: flex !important;
           max-height: 85vh;
-        }
+        }            .modal-left-panel {
+                flex: 1;
+                padding: 30px;
+                overflow-y: auto;
+                max-height: 85vh;
+                /* 隱藏滾動條 */
+                scrollbar-width: none; /* Firefox */
+                -ms-overflow-style: none; /* IE and Edge */
+            }
 
-        .modal-left-panel {
-          flex: 1;
-          padding: 30px;
-          overflow-y: auto;
-          max-height: 85vh;
-        }
+            .modal-left-panel::-webkit-scrollbar {
+                display: none; /* Chrome, Safari, Opera */
+            }
 
         .modal-right-panel {
           flex: 1;
